@@ -42,7 +42,7 @@ class AmazingQuote extends Component {
     e.preventDefault();
     let quoteData = this.state.newQuote;
 
-    fetch('http://localhost:5000/api/amazing_quote', {
+    fetch('http://159.89.40.152:5000/api/amazing_quote', {
         method: "POST",
         body: JSON.stringify(quoteData),
         headers: {

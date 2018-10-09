@@ -14,6 +14,10 @@ app.use(function (req, res, next) {
     next();
 });
 
+app.get('/',(req,res)=> {
+    res.send('hello world')
+})
+
 app.post('/api/amazing_quote', (req, res) => {
     var postData = JSON.stringify(req.body);
     var options = {
