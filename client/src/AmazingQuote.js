@@ -46,8 +46,7 @@ class AmazingQuote extends Component {
     let quoteData = this.state.newQuote;
     //CORS setting on external api suggests usage requested by server rather than browser
     //decided to create dedicated express API server to call amazing quote api
-    //TODO: fix to allow using local ip for this api call. nginx or DO ubunutu issue
-    fetch('http://159.89.40.152:5000/api/amazing_quote', {
+    fetch('http://localhost:5000/api/amazing_quote', {
         method: "POST",
         body: JSON.stringify(quoteData),
         headers: {
