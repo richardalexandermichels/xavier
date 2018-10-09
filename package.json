@@ -1,25 +1,17 @@
 {
-  "name": "xavier",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "react": "^16.5.2",
-    "react-dom": "^16.5.2",
-    "react-scripts": "2.0.4"
-  },
+  "name": "xavier-api-server",
+  "version": "1.0.0",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "client": "cd client && npm run-script start",
+    "server": "nodemon server.js",
+    "dev": "concurrently --kill-others-on-fail \"npm run-script server\" \"npm run-script client\""
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "dotenv": "^6.1.0",
+    "express": "^4.16.2"
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+  "devDependencies": {
+    "concurrently": "^3.5.0"
+  }
 }
