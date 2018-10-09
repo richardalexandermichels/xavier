@@ -74,6 +74,7 @@ class AmazingQuote extends Component {
                 style: 'currency',
                 currency: 'USD',
               }),
+              errors: new Array(6).fill({name:'',reason:''}),
               premium_err: null
             });
           }
