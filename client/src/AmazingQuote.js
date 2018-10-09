@@ -1,6 +1,6 @@
 import React, {Component} from 'react';  
 
-/* Import Components */
+// Import Components 
 import Input from './components/Input'; 
 import Select from './components/Select';
 import Button from './components/Button'
@@ -8,7 +8,9 @@ import Button from './components/Button'
 class AmazingQuote extends Component {
   constructor(props) {
     super(props);
-
+    //AmazingQuote state resonsible for managing form data
+    //newQuote object tracks all form field
+    // other properties manage state of errors and selectable jet models
     this.state = {
       newQuote: {
         owner_name: '',
@@ -24,6 +26,7 @@ class AmazingQuote extends Component {
       premium: null,
       premium_err:null
     }
+    //binding correct this context to class methods
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleClearForm = this.handleClearForm.bind(this);
     this.handleInput = this.handleInput.bind(this)
@@ -41,7 +44,9 @@ class AmazingQuote extends Component {
     // Form submission logic
     e.preventDefault();
     let quoteData = this.state.newQuote;
-
+    //CORS setting on external api suggests usage requested by server rather than browser
+    //decided to create dedicated express API server to call amazing quote api
+    //TODO: fix to allow using local ip for this api call. nginx or DO ubunutu issue
     fetch('http://159.89.40.152:5000/api/amazing_quote', {
         method: "POST",
         body: JSON.stringify(quoteData),
@@ -52,6 +57,9 @@ class AmazingQuote extends Component {
       }).then(response => {
         response.json().then(data =>{
           console.log("Successful" , data);
+          //Based of API response examples can check is res data has errors property
+          //then iterate over errors, and check returned error types and set component 
+          //state reflect detected errors
           if(!!data.errors){
             for (let i = 0; i < data.errors.length;i++) {
               if (data.errors[i].type === 'validation') {
@@ -65,10 +73,13 @@ class AmazingQuote extends Component {
                 });
               }
             }
+            //errors must update state to have no premium
             this.setState({
               premium: null
             });
           }else{
+            //on successful call to api with premium value change AmazingQuote component state
+            //to render premium value
             this.setState({
               premium: data.data.annual_premium.toLocaleString('en-US', {
                 style: 'currency',
@@ -82,6 +93,8 @@ class AmazingQuote extends Component {
         })
     })
   }
+
+  //just a convienient button
   handleClearForm(e) {
     // Logic for resetting the form
     e.preventDefault();
@@ -104,6 +117,8 @@ class AmazingQuote extends Component {
         value = +value;
      }
      this.setState( prevState => {
+       //spread syntax used here create new state, ensuring all previous state values
+       //that are unaffected by this input are carried forward.
         return { 
            newQuote : {
                     ...prevState.newQuote, [name]: value
@@ -120,11 +135,13 @@ class AmazingQuote extends Component {
       }
     }
  }
+ //component property and state based form implementation uses custom input components made
   render() {
     return (
       <div className="form-container">
         <form className="quote-form" onSubmit={this.handleFormSubmit}>
         <div className="input-fields">
+        {/* TODO: make array map of inputs */}
           <Input type={'text'}
                 title= {'Owner Name'} 
                 name= {'owner_name'}

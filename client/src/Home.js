@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Gallery from "./Gallery";
 
 class Home extends Component {
+  //passing array imageData to Gallery component, add more imageData elements when adding content
+  //to home page
   render() {
     let imageData = [
       {

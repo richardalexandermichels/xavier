@@ -10,6 +10,8 @@ import Contact from "./Contact";
 import Background from "./Background";
 
 class Main extends Component {
+  //React router comes in handing providing intuitive navigation between full page react components without
+  // having to serve seperate html pages.
   render() {
     return (
         <div>
